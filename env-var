@@ -1,31 +1,29 @@
 pipeline {
     agent any
-    Environment{
+
+environment {
         GIT_URL= 'https://github.com/Shukla-HP/test.git'
         GIT_BRANCH= 'main'
         GIT_CREDINTIALS= 'shukla'
     }
 
-    
     stages {
-        stage('CHECKOUT') {
-            Steps{
-                script{
-                git branch: "${env.GIT_BRANCH}", 
-                credentialsId:  "${env.GIT_CREDINTIALS}", 
-                url: "${env.GIT_URL}"
-                }
-             }
-        }
-        stage('CHECK') {
-            Steps{
-                sh '''
-                ls -lrt
-                echo $GIT_CREDINTIALS
-                env
-                '''
+        stage('checkout') {
+            steps {
+                  git branch: "${env.GIT_BRANCH}", 
+                  credentialsId: "${env.GIT_CREDINTIALS}", 
+                  url: "${env.GIT_URL}"
             }
-        }    
+        }
+
+        stage('check checkout') {
+            steps {
+                 sh '''
+                ls -lrt
+                echo "this is for shell scrip"
+            '''
+            }
+        }
+
     }
- } 
-    
+}
