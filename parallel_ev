@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+environment {
+        GIT_URL= 'https://github.com/Shukla-HP/test.git'
+        GIT_BRANCH= 'main'
+        GIT_CREDINTIALS= 'shukla'
+    }
+
+    stages {
+        stage('STAGE1') {
+            steps {
+                  git branch: "${env.GIT_BRANCH}", 
+                  credentialsId: "${env.GIT_CREDINTIALS}", 
+                  url: "${env.GIT_URL}"
+            }
+        }
+        stage('Parallel Stage'){
+            parallel {
+
+        stage('test1') {
+            steps {
+                  sh 'echo "this is parllel script1"'
+            }
+        }
+
+        stage('test2') {
+            steps {
+                  sh 'echo "this is parllel script1"'
+            }
+        }
+            }
+        }
+
+        stage('check checkout') {
+            steps {
+                 sh '''
+                ls -lrt
+                echo "this is for shell scrip"
+            '''
+            }
+        }
+    }
+}
+
