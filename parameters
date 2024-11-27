@@ -1,13 +1,19 @@
 pipeline {
     agent any
     parameters {
-        booleanParam defaultValue: true, name: 'RUN_PROJECT'
+
+  booleanParam defaultValue: true, description: 'Deploy or not', name: 'RUN_PROJECT'
+  string description: 'Test or deploy', name: 'TARGET', trim: true
+  choice choices: ['option1', 'option2', 'option3', 'option4'], description: 'Choose', name: 'CHOICE'
+
 }
 
     stages {
         stage('STAGE1') {
             steps {
-               sh 'echo "$(params.RUN_PROJECT)"'   
+               echo "BOOLEAN: $(parms.RUN_PROJECT)" 
+               echo "STRING: $(parms.TARGET)"
+               echo "CHOICE: $(parms.CHOICE)"
             }
         }
     }
