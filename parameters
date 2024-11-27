@@ -11,9 +11,9 @@ pipeline {
     stages {
         stage('STAGE1') {
             steps {
-               echo "BOOLEAN: $(parms.RUN_PROJECT)" 
-               echo "STRING: $(parms.TARGET)"
-               echo "CHOICE: $(parms.CHOICE)"
+               echo "BOOLEAN: ${params.RUN_PROJECT}" 
+               echo "STRING: ${params.TARGET}"
+               echo "CHOICE: ${params.CHOICE}"
             }
         }
     }
