@@ -1,6 +1,13 @@
 pipeline {
    agent any 
 
+stage(CHECKOUT){
+  stage{
+      checkout scmGit(branches: [[name: '*/main']], extensions: [], 
+      userRemoteConfigs: [[credentialsId: 'shukla', 
+      url: 'https://github.com/Shukla-HP/jenkins-pipeline.git']])
+  }
+}
     try {
         sh 'might fail'
     } catch (err) {
